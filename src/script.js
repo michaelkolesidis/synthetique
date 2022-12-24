@@ -386,6 +386,22 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 /**
+ * Background
+ */
+const root = document.querySelector(":root");
+let backgroundSize = 24.5;
+let change = +0.5;
+setInterval(function () {
+  if (backgroundSize == 25) {
+    change = -0.5;
+  }
+  if (backgroundSize == 24) {
+    change = +0.5;
+  }
+  backgroundSize += change;
+}, 500);
+
+/**
  * Animate
  */
 const clock = new THREE.Clock();
@@ -399,6 +415,9 @@ const animate = () => {
 
   cylinderTop.rotation.y = elapsedTime * 0.75;
   cylinderBottom.rotation.y = -elapsedTime * 0.75;
+
+  // Background
+  root.style.setProperty("--background-size", `${backgroundSize}px`);
 
   // Update controls
   controls.update();
