@@ -75,6 +75,14 @@ squareTextureLong.repeat.set(2, 17);
 squareTextureLong.wrapS = THREE.RepeatWrapping;
 squareTextureLong.wrapT = THREE.RepeatWrapping;
 
+const squareTexturePlane = textureLoader.load("/textures/square.png");
+squareTexturePlane.generateMipmaps = false;
+squareTexturePlane.minFilter = THREE.NearestFilter;
+squareTexturePlane.magFilter = THREE.NearestFilter;
+squareTexturePlane.repeat.set(2, 2);
+squareTexturePlane.wrapS = THREE.RepeatWrapping;
+squareTexturePlane.wrapT = THREE.RepeatWrapping;
+
 /**
  * Materials
  */
@@ -88,9 +96,13 @@ const materialHorizontal = new THREE.MeshStandardMaterial({
   map: squareTextureHorizontal,
 });
 
+const materialPlane = new THREE.MeshStandardMaterial({
+  map: squareTexturePlane,
+});
+
 const materialFlatShading = new THREE.MeshStandardMaterial({
   flatShading: true,
-  metalness: 0.7
+  metalness: 0.7,
 });
 
 /**
@@ -179,7 +191,102 @@ structure.scale.set(0.5, 0.5, 0.5);
 scene.add(structure);
 
 // Patches
-// Apply patches on the surfaces that the pattern looks distorted
+const patchGeometry = new THREE.PlaneGeometry(1, 1);
+
+const frontTopLeftVerticalPatch = new THREE.Mesh(patchGeometry, materialPlane);
+frontTopLeftVerticalPatch.position.x = -2;
+frontTopLeftVerticalPatch.position.y = 2.5;
+frontTopLeftVerticalPatch.position.z = 9.501;
+
+const frontTopRightVerticalPatch = new THREE.Mesh(patchGeometry, materialPlane);
+frontTopRightVerticalPatch.position.x = 2;
+frontTopRightVerticalPatch.position.y = 2.5;
+frontTopRightVerticalPatch.position.z = 9.501;
+
+const frontBtmLeftVerticalPatch = new THREE.Mesh(patchGeometry, materialPlane);
+frontBtmLeftVerticalPatch.position.x = -2;
+frontBtmLeftVerticalPatch.position.y = -2.5;
+frontBtmLeftVerticalPatch.position.z = 9.501;
+
+const frontBtmRightVerticalPatch = new THREE.Mesh(patchGeometry, materialPlane);
+frontBtmRightVerticalPatch.position.x = 2;
+frontBtmRightVerticalPatch.position.y = -2.5;
+frontBtmRightVerticalPatch.position.z = 9.501;
+
+const frontTopLeftHorizontalPatch = new THREE.Mesh(
+  patchGeometry,
+  materialPlane
+);
+frontTopLeftHorizontalPatch.position.x = -2;
+frontTopLeftHorizontalPatch.position.y = 2.001;
+frontTopLeftHorizontalPatch.position.z = 10.001;
+frontTopLeftHorizontalPatch.rotation.x = -Math.PI / 2;
+
+const frontTopRightHorizontalPatch = new THREE.Mesh(
+  patchGeometry,
+  materialPlane
+);
+frontTopRightHorizontalPatch.position.x = 2;
+frontTopRightHorizontalPatch.position.y = 2.001;
+frontTopRightHorizontalPatch.position.z = 10.001;
+frontTopRightHorizontalPatch.rotation.x = -Math.PI / 2;
+
+const frontBtmLeftHorizontalPatch = new THREE.Mesh(
+  patchGeometry,
+  materialPlane
+);
+frontBtmLeftHorizontalPatch.position.x = -2;
+frontBtmLeftHorizontalPatch.position.y = -2.001;
+frontBtmLeftHorizontalPatch.position.z = 10.001;
+frontBtmLeftHorizontalPatch.rotation.x = Math.PI / 2;
+
+const frontBtmRightHorizontalPatch = new THREE.Mesh(
+  patchGeometry,
+  materialPlane
+);
+frontBtmRightHorizontalPatch.position.x = 2;
+frontBtmRightHorizontalPatch.position.y = -2.001;
+frontBtmRightHorizontalPatch.position.z = 10.001;
+frontBtmRightHorizontalPatch.rotation.x = Math.PI / 2;
+
+const backTopLeftPatch = new THREE.Mesh(patchGeometry, materialPlane);
+backTopLeftPatch.position.x = -2.501;
+backTopLeftPatch.position.y = 2.5;
+backTopLeftPatch.position.z = 0;
+backTopLeftPatch.rotation.y = -Math.PI / 2;
+
+const backBottomLeftPatch = new THREE.Mesh(patchGeometry, materialPlane);
+backBottomLeftPatch.position.x = -2.501;
+backBottomLeftPatch.position.y = -2.5;
+backBottomLeftPatch.position.z = 0;
+backBottomLeftPatch.rotation.y = -Math.PI / 2;
+
+const backTopRightPatch = new THREE.Mesh(patchGeometry, materialPlane);
+backTopRightPatch.position.x = 2.501;
+backTopRightPatch.position.y = 2.5;
+backTopRightPatch.position.z = 0;
+backTopRightPatch.rotation.y = Math.PI / 2;
+
+const backBottomRightPatch = new THREE.Mesh(patchGeometry, materialPlane);
+backBottomRightPatch.position.x = 2.501;
+backBottomRightPatch.position.y = -2.5;
+backBottomRightPatch.position.z = 0;
+backBottomRightPatch.rotation.y = Math.PI / 2;
+
+structure.add(
+  frontTopLeftVerticalPatch,
+  frontTopRightVerticalPatch,
+  frontBtmLeftVerticalPatch,
+  frontBtmRightVerticalPatch,
+  frontTopLeftHorizontalPatch,
+  frontTopRightHorizontalPatch,
+  frontBtmLeftHorizontalPatch,
+  frontBtmRightHorizontalPatch,
+  backTopLeftPatch,
+  backBottomLeftPatch,
+  backTopRightPatch,
+  backBottomRightPatch
+);
 
 // Triangle
 const triangleGeometry = new THREE.BufferGeometry();
@@ -198,7 +305,10 @@ triangleGeometry.setAttribute(
 
 const triangle = new THREE.Mesh(
   triangleGeometry,
-  new THREE.MeshBasicMaterial({ color: 0xcafe00 })
+  new THREE.MeshBasicMaterial({
+    color: 0xcafe00,
+    side: THREE.DoubleSide,
+  })
 );
 triangle.scale.set(0.4, 0.4, 0.4);
 triangle.position.y = 0.075;
@@ -207,19 +317,13 @@ scene.add(triangle);
 // Cylinders
 const cylinderGeometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 3, 1);
 
-const cylinderTop = new THREE.Mesh(
-  cylinderGeometry,
-  materialFlatShading
-);
+const cylinderTop = new THREE.Mesh(cylinderGeometry, materialFlatShading);
 cylinderTop.scale.set(0.6, 0.6, 0.6);
 cylinderTop.rotation.x = Math.PI / 2;
 cylinderTop.position.y = 1.75;
 cylinderTop.position.z = 2.5;
 
-const cylinderBottom = new THREE.Mesh(
-  cylinderGeometry,
-  materialFlatShading
-);
+const cylinderBottom = new THREE.Mesh(cylinderGeometry, materialFlatShading);
 cylinderBottom.scale.set(0.6, 0.6, 0.6);
 cylinderBottom.rotation.x = Math.PI / 2;
 cylinderBottom.position.y = -1.75;
