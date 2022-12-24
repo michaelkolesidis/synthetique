@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+  background-image: radial-gradient(rgb(0, 0, 0) 25px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -19px -19px;
+  animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #bc00ff;
+  }
+  50% {
+    background-color: #cafe00;
+  }
+  100% {
+    background-color: #bc00ff;
+  }
+}
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}

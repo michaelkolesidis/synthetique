@@ -1,0 +1,309 @@
+import "./style.css";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import * as dat from "dat.gui";
+
+/**
+ * Basics
+ */
+// Debug panel
+const gui = new dat.GUI();
+dat.GUI.toggleHide();
+
+// Canvas
+const canvas = document.querySelector("canvas.webgl");
+
+// Scene
+const scene = new THREE.Scene();
+
+/**
+ * Lights
+ */
+// Ambient light
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
+scene.add(ambientLight);
+
+// front
+const frontLight = new THREE.DirectionalLight(0xbc00ff, 1);
+frontLight.position.set(0, 0, 4.5);
+
+// top
+const topLight = new THREE.DirectionalLight(0xbc00ff, 1);
+topLight.position.set(0, 2, 0);
+
+// bottom
+const bottomLight = new THREE.DirectionalLight(0xcafe00, 1);
+bottomLight.position.set(0, -2, 0);
+
+// left
+const leftLight = new THREE.DirectionalLight(0xcafe00, 1);
+leftLight.position.set(-2, 0, 0);
+
+// right
+const rightLight = new THREE.DirectionalLight(0xbc00ff, 1);
+rightLight.position.set(2, 0, 0);
+
+scene.add(frontLight, topLight, bottomLight, leftLight, rightLight);
+
+/**
+ * Textures
+ */
+const textureLoader = new THREE.TextureLoader();
+
+const squareTexture = textureLoader.load("/textures/square.png");
+squareTexture.generateMipmaps = false;
+squareTexture.minFilter = THREE.NearestFilter;
+squareTexture.magFilter = THREE.NearestFilter;
+squareTexture.repeat.set(2, 7);
+squareTexture.wrapS = THREE.RepeatWrapping;
+squareTexture.wrapT = THREE.RepeatWrapping;
+
+const squareTextureHorizontal = textureLoader.load("/textures/square.png");
+squareTextureHorizontal.generateMipmaps = false;
+squareTextureHorizontal.minFilter = THREE.NearestFilter;
+squareTextureHorizontal.magFilter = THREE.NearestFilter;
+squareTextureHorizontal.repeat.set(2, 10);
+squareTextureHorizontal.wrapS = THREE.RepeatWrapping;
+squareTextureHorizontal.wrapT = THREE.RepeatWrapping;
+
+const squareTextureLong = textureLoader.load("/textures/square.png");
+squareTextureLong.generateMipmaps = false;
+squareTextureLong.minFilter = THREE.NearestFilter;
+squareTextureLong.magFilter = THREE.NearestFilter;
+squareTextureLong.repeat.set(2, 17);
+squareTextureLong.wrapS = THREE.RepeatWrapping;
+squareTextureLong.wrapT = THREE.RepeatWrapping;
+
+/**
+ * Materials
+ */
+const material = new THREE.MeshStandardMaterial({
+  map: squareTexture,
+});
+const materialLong = new THREE.MeshStandardMaterial({
+  map: squareTextureLong,
+});
+const materialHorizontal = new THREE.MeshStandardMaterial({
+  map: squareTextureHorizontal,
+});
+
+const materialFlatShading = new THREE.MeshStandardMaterial({
+  flatShading: true,
+  metalness: 0.7
+});
+
+/**
+ * Objects
+ */
+// Main Structure
+const structure = new THREE.Group();
+
+const geometryHorizontal = new THREE.BoxGeometry(1, 5, 1);
+const geometryVertical = new THREE.BoxGeometry(1, 4, 1);
+const geometryDeep = new THREE.BoxGeometry(1, 9, 1);
+
+// BACK
+// back bottom
+const backBottom = new THREE.Mesh(geometryHorizontal, materialHorizontal);
+backBottom.position.y = -2.5;
+backBottom.rotation.z = Math.PI / 2;
+
+// back top
+const backTop = new THREE.Mesh(geometryHorizontal, materialHorizontal);
+backTop.position.y = 2.5;
+backTop.rotation.z = Math.PI / 2;
+
+// back left
+const backLeft = new THREE.Mesh(geometryVertical, material);
+backLeft.position.x = -2;
+
+// back right
+const backRight = new THREE.Mesh(geometryVertical, material);
+backRight.position.x = 2;
+
+// DEPTH
+// depth top left
+const depthTopLeft = new THREE.Mesh(geometryDeep, materialLong);
+depthTopLeft.rotation.x = Math.PI / 2;
+depthTopLeft.position.x = -2;
+depthTopLeft.position.y = 2.5;
+depthTopLeft.position.z = 5;
+
+// depth top right
+const depthTopRight = new THREE.Mesh(geometryDeep, materialLong);
+depthTopRight.rotation.x = Math.PI / 2;
+depthTopRight.position.x = 2;
+depthTopRight.position.y = 2.5;
+depthTopRight.position.z = 5;
+
+// depth bottom left
+const depthBottomLeft = new THREE.Mesh(geometryDeep, materialLong);
+depthBottomLeft.rotation.x = Math.PI / 2;
+depthBottomLeft.position.x = -2;
+depthBottomLeft.position.y = -2.5;
+depthBottomLeft.position.z = 5;
+
+// depth bottom right
+const depthBottomRight = new THREE.Mesh(geometryDeep, materialLong);
+depthBottomRight.rotation.x = Math.PI / 2;
+depthBottomRight.position.x = 2;
+depthBottomRight.position.y = -2.5;
+depthBottomRight.position.z = 5;
+
+// FRONT
+// front left
+const frontLeft = new THREE.Mesh(geometryVertical, material);
+frontLeft.position.x = -2;
+frontLeft.position.z = 10;
+
+// front right
+const frontRight = new THREE.Mesh(geometryVertical, material);
+frontRight.position.x = 2;
+frontRight.position.z = 10;
+
+structure.add(
+  backBottom,
+  backTop,
+  backLeft,
+  backRight,
+  depthTopLeft,
+  depthTopRight,
+  depthBottomLeft,
+  depthBottomRight,
+  frontLeft,
+  frontRight
+);
+
+structure.scale.set(0.5, 0.5, 0.5);
+scene.add(structure);
+
+// Patches
+// Apply patches on the surfaces that the pattern looks distorted
+
+// Triangle
+const triangleGeometry = new THREE.BufferGeometry();
+const triangleVertices = new Float32Array([
+  // vertex 1
+  -1.0, -1.0, 0,
+  // vertex 2
+  1.0, -1.0, 0,
+  // vertex 3
+  0, 0.6, 0,
+]);
+triangleGeometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(triangleVertices, 3)
+);
+
+const triangle = new THREE.Mesh(
+  triangleGeometry,
+  new THREE.MeshBasicMaterial({ color: 0xcafe00 })
+);
+triangle.scale.set(0.4, 0.4, 0.4);
+triangle.position.y = 0.075;
+scene.add(triangle);
+
+// Cylinders
+const cylinderGeometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 3, 1);
+
+const cylinderTop = new THREE.Mesh(
+  cylinderGeometry,
+  materialFlatShading
+);
+cylinderTop.scale.set(0.6, 0.6, 0.6);
+cylinderTop.rotation.x = Math.PI / 2;
+cylinderTop.position.y = 1.75;
+cylinderTop.position.z = 2.5;
+
+const cylinderBottom = new THREE.Mesh(
+  cylinderGeometry,
+  materialFlatShading
+);
+cylinderBottom.scale.set(0.6, 0.6, 0.6);
+cylinderBottom.rotation.x = Math.PI / 2;
+cylinderBottom.position.y = -1.75;
+cylinderBottom.position.z = 2.5;
+
+scene.add(cylinderTop, cylinderBottom);
+
+/**
+ * Sizes
+ */
+const sizes = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+};
+
+window.addEventListener("resize", () => {
+  // Update sizes
+  sizes.width = window.innerWidth;
+  sizes.height = window.innerHeight;
+
+  // Update camera
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+
+  // Update renderer
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
+/**
+ * Camera
+ */
+const camera = new THREE.PerspectiveCamera(
+  75,
+  sizes.width / sizes.height,
+  0.1,
+  20
+);
+camera.position.x = 0;
+camera.position.y = 0;
+camera.position.z = 6;
+
+camera.lookAt(structure.position);
+scene.add(camera);
+
+// Controls
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+
+/**
+ * Renderer
+ */
+const renderer = new THREE.WebGLRenderer({
+  canvas: canvas,
+  antialias: true,
+  alpha: true,
+});
+
+renderer.setSize(sizes.width, sizes.height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+/**
+ * Animate
+ */
+const clock = new THREE.Clock();
+
+const animate = () => {
+  const elapsedTime = clock.getElapsedTime();
+
+  ambientLight.intensity = Math.abs(Math.sin(elapsedTime * 0.5) * 0.5);
+
+  triangle.position.z = Math.sin(elapsedTime * 0.5);
+
+  cylinderTop.rotation.y = elapsedTime * 0.75;
+  cylinderBottom.rotation.y = -elapsedTime * 0.75;
+
+  // Update controls
+  controls.update();
+
+  // Render
+  renderer.render(scene, camera);
+
+  // Call animate again on the next frame
+  window.requestAnimationFrame(animate);
+};
+
+animate();
