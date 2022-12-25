@@ -21,7 +21,7 @@ const scene = new THREE.Scene();
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
-gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
+// gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
 scene.add(ambientLight);
 
 // front
@@ -372,6 +372,31 @@ scene.add(camera);
 // Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
+controls.enabled = false;
+gui.add(controls, "enabled");
+controls.enablePan = false;
+gui.add(controls, "enablePan");
+controls.autoRotate = false;
+gui.add(controls, "autoRotate");
+controls.autoRotateSpeed = 0.5;
+controls.maxDistance = 10;
+controls.minDistance = 0.75;
+controls.maxAzimuthAngle = Math.PI / 4;
+controls.minAzimuthAngle = -Math.PI / 4;
+controls.maxPolarAngle = Math.PI / 1.5;
+controls.minPolarAngle = Math.PI / 4;
+controls.rotateSpeed = 0.7;
+
+const enableFullRotation = {
+  enableFullRotation: () => {
+    controls.maxAzimuthAngle = Infinity;
+    controls.minAzimuthAngle = Infinity;
+  },
+};
+
+gui.add(enableFullRotation, "enableFullRotation");
+
+gui.add(controls, "autoRotateSpeed", -10, 10, 0.001);
 
 /**
  * Renderer
