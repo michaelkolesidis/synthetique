@@ -4,6 +4,51 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
 /**
+ * Main Menu
+ */
+const mainMenu = document.createElement("div");
+mainMenu.setAttribute("id", "main-menu");
+
+const menuContainer = document.createElement("div");
+menuContainer.setAttribute("id", "menu-container");
+
+const heading = document.createElement("div");
+heading.setAttribute("id", "heading");
+heading.innerText = "synthétique";
+menuContainer.appendChild(heading);
+
+const enterButton = document.createElement("button");
+enterButton.setAttribute("id", "enter-button");
+enterButton.innerText = "enter";
+menuContainer.appendChild(enterButton);
+
+const credits = document.createElement("div");
+credits.setAttribute("id", "credits");
+credits.innerHTML = `
+made by 
+<a 
+  href="https://michaelkolesidis.com/" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+>
+  michael kolesidis
+</a>
+<br>
+music by 
+<a 
+  href="https://free-songs.de/synthwave-piano/" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+>
+aries beats
+</a>
+`;
+
+mainMenu.appendChild(credits);
+mainMenu.appendChild(menuContainer);
+document.body.appendChild(mainMenu);
+
+/**
  * Basics
  */
 // HTML Title and Favicon
@@ -16,8 +61,20 @@ favicon.href =
   "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>";
 document.getElementsByTagName("head")[0].appendChild(favicon);
 
+// Disable right click
+document.addEventListener(
+  "contextmenu",
+  (e) => {
+    e.preventDefault();
+  },
+  false
+);
+
 // Debug panel
-const gui = new dat.GUI({ open: true });
+const gui = new dat.GUI({
+  open: true,
+  width: 300,
+});
 dat.GUI.toggleHide();
 
 // Canvas
@@ -436,6 +493,27 @@ setInterval(function () {
   }
   backgroundSize += change;
 }, 300);
+
+/**
+ * Sound
+ */
+let audio = new Audio("/sound/aries_beats_synthwave_piano.mp3");
+audio.loop = true;
+audio.volume = 0.02;
+const volume = 0.2;
+const volumeStep = 0.001;
+
+setInterval(() => {
+  if (audio.volume < volume) {
+    audio.volume += volumeStep;
+  }
+}, 75);
+
+enterButton.addEventListener("click", () => {
+  mainMenu.style.opacity = 0;
+  mainMenu.style.pointerEvents = "none";
+  audio.play();
+});
 
 /**
  * Animate
