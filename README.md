@@ -20,4 +20,4 @@ npm run build
 ## Acknowledgments
 Music by [Aries Beats](https://free-songs.de/synthwave-piano/)
 
-Special thanks to [Ricardo Cabello, aka Mr. doob](https://mrdoob.com/) for creating Three.js and to [Bruno Simon](https://bruno-simon.com/) for being an inspiring teacher.
+Special thanks to [Ricardo Cabello, aka Mr. doob](https://mrdoob.com/) for creating Three.js and to [Bruno Simon](https://bruno-simon.com/) for being such an inspiring teacher.
