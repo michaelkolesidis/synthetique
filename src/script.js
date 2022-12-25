@@ -373,6 +373,34 @@ scene.add(camera);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 
+controls.autoRotate = false;
+controls.autoRotateSpeed = 0.5;
+controls.maxDistance = 50;
+controls.minDistance = 5;
+controls.maxAzimuthAngle = Math.PI / 3;
+controls.minAzimuthAngle = - Math.PI / 3;
+controls.maxPolarAngle = Math.PI / 1.5;
+controls.minPolarAngle = Math.PI / 4;
+
+controls.minZoom = 20;
+controls.panSpeed = 0;
+controls.rotateSpeed = 0.7;
+
+
+const enableFullRotation = {
+    enableFullRotation: () => {
+        controls.maxAzimuthAngle = Infinity;
+        controls.minAzimuthAngle = Infinity;
+    }
+}
+
+gui
+    .add(enableFullRotation, "enableFullRotation");
+gui
+    .add(controls, "autoRotate");
+gui
+    .add(controls, "autoRotateSpeed", -10, 10, 0.001);
+
 /**
  * Renderer
  */
