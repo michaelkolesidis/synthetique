@@ -6,8 +6,18 @@ import * as dat from "dat.gui";
 /**
  * Basics
  */
+// HTML Title and Favicon
+document.title = "synthétique";
+
+const favicon =
+  document.querySelector("link[rel*='icon']") || document.createElement("link");
+favicon.rel = "icon";
+favicon.href =
+  "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>";
+document.getElementsByTagName("head")[0].appendChild(favicon);
+
 // Debug panel
-const gui = new dat.GUI({ open: true});
+const gui = new dat.GUI({ open: true });
 dat.GUI.toggleHide();
 
 // Canvas
@@ -387,15 +397,16 @@ controls.maxPolarAngle = Math.PI / 1.5;
 controls.minPolarAngle = Math.PI / 4;
 controls.rotateSpeed = 0.7;
 
-const enableFullRotation = {
-  enableFullRotation: () => {
+const freeControls = {
+  freeControls: () => {
     controls.maxAzimuthAngle = Infinity;
     controls.minAzimuthAngle = Infinity;
+    controls.maxPolarAngle = Math.PI;
+    controls.minPolarAngle = 0;
   },
 };
 
-gui.add(enableFullRotation, "enableFullRotation");
-
+gui.add(freeControls, "freeControls");
 gui.add(controls, "autoRotateSpeed", -10, 10, 0.001);
 
 /**
@@ -424,7 +435,7 @@ setInterval(function () {
     change = +0.5;
   }
   backgroundSize += change;
-}, 500);
+}, 300);
 
 /**
  * Animate
