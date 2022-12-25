@@ -21,6 +21,8 @@ npm run build
 
 
 ## Screenshots
+![screenshot](/screenshots/screenshot-menu.png)
+
 ![screenshot](/screenshots/screenshot-01.png)
 
 ![screenshot](/screenshots/screenshot-02.png)
