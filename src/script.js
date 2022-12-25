@@ -14,7 +14,7 @@ menuContainer.setAttribute("id", "menu-container");
 
 const heading = document.createElement("div");
 heading.setAttribute("id", "heading");
-heading.innerText = "synthétique";
+heading.innerHTML = "▲<br>synthétique";
 menuContainer.appendChild(heading);
 
 const enterButton = document.createElement("button");
