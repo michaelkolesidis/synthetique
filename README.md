@@ -1,7 +1,8 @@
 # synthétique
 Made with [Three.js](https://threejs.org/)
 
-![screenshot](/screenshots/screenshot.png)
+![screenshot](/screenshots/screenshot-main.png)
+
 
 ## Setup
 
@@ -17,6 +18,15 @@ npm run dev
 # Build for production in the dist/ directory
 npm run build
 ```
+
+
+## Screenshots
+![screenshot](/screenshots/screenshot-01.png)
+
+![screenshot](/screenshots/screenshot-02.png)
+
+
+
 ## Acknowledgments
 Music by [Aries Beats](https://free-songs.de/synthwave-piano/)
 
