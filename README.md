@@ -4,6 +4,26 @@ Made with [Three.js](https://threejs.org/)
 ![screenshot](/screenshots/screenshot-main.png)
 
 
+
+## Controls
+
+| Key                | Function           |
+| ------------------ |:------------------:|
+| S                  | Start/stop music   |
+| M                  | Toggle Mark Fisher |
+| H                  | Show controls      |
+
+### Control panel
+| Option          | Function                                                   |
+| --------------- |:----------------------------------------------------------:|
+| enabled         | Enable OrbitControls (hold left-click and move mouse)      |
+| enablePan       | Enable camera panning (hold right-click and move mouse)    |
+| autoRotate      | Rotate the structure automatically around the Y-axis       |
+| freeControls    | Remove limits to camera's horizontal and vertical rotation |
+| autoRotateSpeed | Set the speed of  the automatic rotation                   |
+
+
+
 ## Setup
 
 First, you need to download and install [Node.js](https://nodejs.org/en/download/). Then, clone or download the project, and while inside its main folder run the following commands:
@@ -33,3 +53,5 @@ npm run build
 Music by [Aries Beats](https://free-songs.de/synthwave-piano/)
 
 Special thanks to [Ricardo Cabello, aka Mr. doob](https://mrdoob.com/) for creating Three.js and to [Bruno Simon](https://bruno-simon.com/) for being such an inspiring teacher.
+
+Inspired by the works of [Mark Fisher, aka k-punk](https://en.wikipedia.org/wiki/Mark_Fisher)
