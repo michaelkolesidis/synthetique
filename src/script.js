@@ -400,6 +400,47 @@ cylinderBottom.position.z = 2.5;
 
 scene.add(cylinderTop, cylinderBottom);
 
+// Mark Fisher
+let markFisherVisible = false;
+let markFisherRight;
+let markFisherLeft;
+
+document.addEventListener("keydown", (e) => {
+  if (entered) {
+    if (e.code === "KeyM") {
+      if (!markFisherVisible) {
+        const markFisherTexture = textureLoader.load(
+          "/textures/mark_fisher.png"
+        );
+        const materialMarkFisher = new THREE.MeshStandardMaterial({
+          map: markFisherTexture,
+        });
+
+        markFisherRight = new THREE.Mesh(
+          new THREE.PlaneGeometry(2, 2),
+          materialMarkFisher
+        );
+        markFisherRight.position.z = 1.5;
+        markFisherRight.position.x = 2;
+        markFisherRight.rotation.y = -Math.PI / 2;
+
+        markFisherLeft = markFisherRight.clone();
+        markFisherLeft.position.z = 1.5;
+        markFisherLeft.position.x = -2;
+        markFisherLeft.rotation.y = Math.PI / 2;
+
+        scene.add(markFisherRight, markFisherLeft);
+        markFisherVisible = true;
+      } else {
+        scene.remove(markFisherRight, markFisherLeft);
+        markFisherRight = null;
+        markFisherLeft = null;
+        markFisherVisible = false;
+      }
+    }
+  }
+});
+
 /**
  * Sizes
  */
