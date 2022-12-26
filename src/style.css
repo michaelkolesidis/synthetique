@@ -2,13 +2,15 @@
 
 :root {
   --background-size: 24.5px;
+  --color1: #bc00ff;
+  --color2: #cafe00;
 }
 
 * {
   margin: 0;
   padding: 0;
   font-family: "Space Mono", monospace;
-  color: white;
+  color: #ffffff;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -33,13 +35,13 @@ body {
 
 @keyframes pulse {
   0% {
-    background-color: #bc00ff;
+    background-color: var(--color1);
   }
   50% {
-    background-color: #cafe00;
+    background-color: var(--color2);
   }
   100% {
-    background-color: #bc00ff;
+    background-color: var(--color1);
   }
 }
 
@@ -110,4 +112,28 @@ body {
 
 #credits > a {
   text-decoration: underline;
+}
+
+#asterisk {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.5em;
+  padding: 0 0.5em;
+  background-color: #000000;
+  cursor: pointer;
+  z-index: 5;
+}
+
+#help-panel {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  padding: 0 0.5em;
+  line-height: 2.5em;
+  background-color: #000000;
+  z-index: 4;
+  padding-left: 2em;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }

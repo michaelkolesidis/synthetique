@@ -4,6 +4,44 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
 /**
+ * Basics
+ */
+// HTML Title and Favicon
+document.title = "synthétique";
+
+const favicon =
+  document.querySelector("link[rel*='icon']") || document.createElement("link");
+favicon.rel = "icon";
+favicon.href =
+  "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>";
+document.getElementsByTagName("head")[0].appendChild(favicon);
+
+// Disable right click
+document.addEventListener(
+  "contextmenu",
+  (e) => {
+    e.preventDefault();
+  },
+  false
+);
+
+// Debug panel
+const gui = new dat.GUI({
+  open: true,
+  width: 300,
+});
+dat.GUI.toggleHide();
+let orbitControlsFolder = gui.addFolder("Orbit Controls");
+let autoRotateFolder = gui.addFolder("Auto Rotate");
+
+
+// Canvas
+const canvas = document.querySelector("canvas.webgl");
+
+// Scene
+const scene = new THREE.Scene();
+
+/**
  * Main Menu
  */
 let entered = false;
@@ -51,39 +89,31 @@ mainMenu.appendChild(menuContainer);
 document.body.appendChild(mainMenu);
 
 /**
- * Basics
+ * Help Panel
  */
-// HTML Title and Favicon
-document.title = "synthétique";
+const asterisk = document.createElement("div");
+asterisk.setAttribute("id", "asterisk");
+asterisk.innerHTML = "✱";
+mainMenu.appendChild(asterisk);
 
-const favicon =
-  document.querySelector("link[rel*='icon']") || document.createElement("link");
-favicon.rel = "icon";
-favicon.href =
-  "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>";
-document.getElementsByTagName("head")[0].appendChild(favicon);
+let isHelpPanelOpen = false;
+const helpPanel = document.createElement("div");
+helpPanel.setAttribute("id", "help-panel");
+helpPanel.innerHTML = `
+key<br>
+S : start/stop music<br>
+H : open controls`;
+mainMenu.appendChild(helpPanel);
 
-// Disable right click
-document.addEventListener(
-  "contextmenu",
-  (e) => {
-    e.preventDefault();
-  },
-  false
-);
-
-// Debug panel
-const gui = new dat.GUI({
-  open: true,
-  width: 300,
+asterisk.addEventListener("click", () => {
+  if (!isHelpPanelOpen) {
+    helpPanel.style.opacity = 1;
+    isHelpPanelOpen = true;
+  } else {
+    helpPanel.style.opacity = 0;
+    isHelpPanelOpen = false;
+  }
 });
-dat.GUI.toggleHide();
-
-// Canvas
-const canvas = document.querySelector("canvas.webgl");
-
-// Scene
-const scene = new THREE.Scene();
 
 /**
  * Lights
@@ -485,11 +515,9 @@ scene.add(camera);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.enabled = false;
-gui.add(controls, "enabled");
+orbitControlsFolder.add(controls, "enabled");
 controls.enablePan = false;
-gui.add(controls, "enablePan");
-controls.autoRotate = false;
-gui.add(controls, "autoRotate");
+orbitControlsFolder.add(controls, "enablePan");
 controls.autoRotateSpeed = 0.5;
 controls.maxDistance = 10;
 controls.minDistance = 0.75;
@@ -498,7 +526,6 @@ controls.minAzimuthAngle = -Math.PI / 4;
 controls.maxPolarAngle = Math.PI / 1.5;
 controls.minPolarAngle = Math.PI / 4;
 controls.rotateSpeed = 0.7;
-
 const freeControls = {
   freeControls: () => {
     controls.maxAzimuthAngle = Infinity;
@@ -507,9 +534,10 @@ const freeControls = {
     controls.minPolarAngle = 0;
   },
 };
-
-gui.add(freeControls, "freeControls");
-gui.add(controls, "autoRotateSpeed", -10, 10, 0.001);
+orbitControlsFolder.add(freeControls, "freeControls");
+controls.autoRotate = false;
+autoRotateFolder.add(controls, "autoRotate");
+autoRotateFolder.add(controls, "autoRotateSpeed", -10, 10, 0.001);
 
 /**
  * Renderer
