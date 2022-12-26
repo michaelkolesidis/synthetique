@@ -6,6 +6,8 @@ import * as dat from "dat.gui";
 /**
  * Main Menu
  */
+let entered = false;
+
 const mainMenu = document.createElement("div");
 mainMenu.setAttribute("id", "main-menu");
 
@@ -497,11 +499,12 @@ setInterval(function () {
 /**
  * Sound
  */
-let audio = new Audio("/sound/aries_beats_synthwave_piano.mp3");
+const audio = new Audio("/sound/aries_beats_synthwave_piano.mp3");
 audio.loop = true;
 audio.volume = 0.02;
 const volume = 0.2;
 const volumeStep = 0.001;
+let playing = false;
 
 setInterval(() => {
   if (audio.volume < volume) {
@@ -512,7 +515,23 @@ setInterval(() => {
 enterButton.addEventListener("click", () => {
   mainMenu.style.opacity = 0;
   mainMenu.style.pointerEvents = "none";
+  playing = true;
+  entered = true;
   audio.play();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (entered) {
+    if (e.code === "KeyS") {
+      if (playing) {
+        playing = false;
+        audio.pause();
+      } else {
+        playing = true;
+        audio.play();
+      }
+    }
+  }
 });
 
 /**
