@@ -4,7 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
 /**
- * Basics
+ * Basicsm
  */
 // HTML Title and Favicon
 document.title = "synthétique";
@@ -119,7 +119,6 @@ asterisk.addEventListener("click", () => {
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
-// gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
 scene.add(ambientLight);
 
 // front
@@ -186,16 +185,20 @@ squareTexturePlane.wrapT = THREE.RepeatWrapping;
  */
 const material = new THREE.MeshStandardMaterial({
   map: squareTexture,
+  flatShading: true,
 });
 const materialLong = new THREE.MeshStandardMaterial({
   map: squareTextureLong,
+  flatShading: true,
 });
 const materialHorizontal = new THREE.MeshStandardMaterial({
   map: squareTextureHorizontal,
+  flatShading: true,
 });
 
 const materialPlane = new THREE.MeshStandardMaterial({
   map: squareTexturePlane,
+  flatShading: true,
 });
 
 const materialFlatShading = new THREE.MeshStandardMaterial({

@@ -4,13 +4,15 @@
   --background-size: 24.5px;
   --color1: #bc00ff;
   --color2: #cafe00;
+  --white: #ffffff;
+  --black: #000000;
 }
 
 * {
   margin: 0;
   padding: 0;
   font-family: "Space Mono", monospace;
-  color: #ffffff;
+  color: var(--white);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -20,7 +22,7 @@
 html,
 body {
   background-image: radial-gradient(
-    #000000 var(--background-size),
+    var(--black) var(--background-size),
     transparent 0
   );
   background-size: 40px 40px;
@@ -55,7 +57,7 @@ body {
   bottom: 0;
   left: 0;
   background-image: radial-gradient(
-    #000000 var(--background-size),
+    var(--black) var(--background-size),
     transparent 0
   );
   background-size: 40px 40px;
@@ -71,7 +73,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #000000;
+  background-color: var(--black);
   width: 100%;
   padding-top: 2em;
   padding-bottom: 3.2em;
@@ -84,7 +86,7 @@ body {
 
 #enter-button {
   background: none;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--white);
   padding: 0.5em;
   margin-top: 1em;
   cursor: pointer;
@@ -100,7 +102,7 @@ body {
   bottom: 0;
   text-align: center;
   padding: 0.5em 1em;
-  background-color: #000000;
+  background-color: var(--black);
 }
 
 #credits > a {
@@ -115,7 +117,7 @@ body {
   padding: 0 0.5em;
   cursor: pointer;
   z-index: 5;
-  background-color: #000000;
+  background-color: var(--black);
 }
 
 #help-panel {
@@ -128,5 +130,5 @@ body {
   padding-left: 2em;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
-  background-color: #000000;
+  background-color: var(--black);
 }

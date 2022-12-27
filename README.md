@@ -35,17 +35,17 @@ Made with [Three.js](https://threejs.org/)
 
 ## Setup
 
-First, you need to download and install [Node.js](https://nodejs.org/en/download/). Then, clone or download the project, and while inside its main folder run the following commands:
+First, you need to download and install [Node.js](https://nodejs.org/en/download/), as well as, install Yarn globally. Then, clone or download the project, and while inside its main folder run the following commands:
 
 ```bash
 # Install dependencies (only the first time)
-npm install
+yarn
 
 # Run the local server at localhost:8080
-npm run dev
+yarn dev
 
 # Build for production in the dist/ directory
-npm run build
+yarn build
 ```
 
 
