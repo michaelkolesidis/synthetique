@@ -64,3 +64,8 @@ Music by [Aries Beats](https://free-songs.de/synthwave-piano/)
 Special thanks to [Ricardo Cabello, aka Mr. doob](https://mrdoob.com/) for creating Three.js and to [Bruno Simon](https://bruno-simon.com/) for being such an inspiring teacher.
 
 Inspired by the works of [Mark Fisher, aka k-punk](https://en.wikipedia.org/wiki/Mark_Fisher)
+
+
+
+## Copyright
+Copyright (c) 2022 Michael Kolesidis. All rights reserved.
