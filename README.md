@@ -25,10 +25,10 @@ Made with [Three.js](https://threejs.org/)
 ### Control panel
 | Option          | Function                                                   |
 | --------------- |:----------------------------------------------------------:|
-| enabled         | Enable OrbitControls (hold left-click and move mouse)      |
+| enabled         | Enable orbit controls (hold left-click and move mouse)     |
 | enablePan       | Enable camera panning (hold right-click and move mouse)    |
-| autoRotate      | Rotate the structure automatically around the Y-axis       |
 | freeControls    | Remove limits to camera's horizontal and vertical rotation |
+| autoRotate      | Rotate the structure automatically around the Y-axis       |
 | autoRotateSpeed | Set the speed of  the automatic rotation                   |
 
 
