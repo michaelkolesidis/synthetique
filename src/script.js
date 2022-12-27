@@ -34,7 +34,6 @@ dat.GUI.toggleHide();
 let orbitControlsFolder = gui.addFolder("Orbit Controls");
 let autoRotateFolder = gui.addFolder("Auto Rotate");
 
-
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
 

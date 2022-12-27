@@ -5,6 +5,15 @@ Made with [Three.js](https://threejs.org/)
 
 
 
+## Other Technologies Used
+* [dat.GUI](https://github.com/dataarts/dat.gui)
+* [Webpack](https://webpack.js.org/)
+* [Babel](https://babeljs.io/)
+* [Yarn](https://yarnpkg.com/)
+* [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
+
+
+
 ## Controls
 
 | Key                | Function           |
