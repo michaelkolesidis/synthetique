@@ -10,11 +10,11 @@
     "build": "vite build"
   },
   "devDependencies": {
-    "vite": "^4.2.1"
+    "vite": "^4.3.9"
   },
   "dependencies": {
     "dat.gui": "^0.7.9",
     "stats.js": "^0.17.0",
-    "three": "^0.150.1"
+    "three": "^0.153.0"
   }
 }

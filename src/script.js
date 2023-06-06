@@ -1,7 +1,8 @@
 // Author: Michael Kolesidis
 // Title: synthétique
 
-// Copyright (c) 2023 Michael Kolesidis - https://michaelkolesidis.com/
+// Copyright (c) 2023 Michael Kolesidis <michael.kolesidis@gmail.com>
+// https://michaelkolesidis.com/
 // I am the sole copyright owner of this Work.
 //
 // Reproduction of any of the artwork on this website
