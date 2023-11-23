@@ -61,6 +61,12 @@ Special thanks to [Ricardo Cabello, aka Mr. doob](https://mrdoob.com/) for creat
 
 Inspired by the works of [Mark Fisher, aka k-punk](https://en.wikipedia.org/wiki/Mark_Fisher)
 
+## 💖 Support the Project
+
+Thank you so much for your interest in my project! If you want to go a step further and support my work, buy me a coffee:
+
+<a href='https://ko-fi.com/michaelkolesidis' target='_blank'><img src='https://cdn.ko-fi.com/cdn/kofi1.png' style='border:0px;height:45px;' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 ## Copyright
 
 Copyright (c) 2023 Michael Kolesidis. All rights reserved.
