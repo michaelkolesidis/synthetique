@@ -1,7 +1,7 @@
 // Author: Michael Kolesidis
 // Title: synthétique
 
-// Copyright (c) 2023 Michael Kolesidis <michael.kolesidis@gmail.com>
+// Copyright (c) Michael Kolesidis <michael.kolesidis@gmail.com>
 // https://michaelkolesidis.com/
 // I am the sole copyright owner of this Work.
 //
@@ -21,26 +21,26 @@
 // Beyond that, no further copies of works of art may be made or
 // distributed on this website without written permission.
 
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import * as dat from "dat.gui";
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as dat from 'dat.gui';
 
 /**
  * Basics
  */
 // HTML Title and Favicon
-document.title = "synthétique";
+document.title = 'synthétique';
 
 const favicon =
-  document.querySelector("link[rel*='icon']") || document.createElement("link");
-favicon.rel = "icon";
+  document.querySelector("link[rel*='icon']") || document.createElement('link');
+favicon.rel = 'icon';
 favicon.href =
-  "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>";
-document.getElementsByTagName("head")[0].appendChild(favicon);
+  'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>';
+document.getElementsByTagName('head')[0].appendChild(favicon);
 
 // Disable right click
 document.addEventListener(
-  "contextmenu",
+  'contextmenu',
   (e) => {
     e.preventDefault();
   },
@@ -53,11 +53,11 @@ const gui = new dat.GUI({
   width: 300,
 });
 dat.GUI.toggleHide();
-let orbitControlsFolder = gui.addFolder("Orbit Controls");
-let autoRotateFolder = gui.addFolder("Auto Rotate");
+let orbitControlsFolder = gui.addFolder('Orbit Controls');
+let autoRotateFolder = gui.addFolder('Auto Rotate');
 
 // Canvas
-const canvas = document.querySelector("canvas.webgl");
+const canvas = document.querySelector('canvas.webgl');
 
 // Scene
 const scene = new THREE.Scene();
@@ -67,24 +67,24 @@ const scene = new THREE.Scene();
  */
 let entered = false;
 
-const mainMenu = document.createElement("div");
-mainMenu.setAttribute("id", "main-menu");
+const mainMenu = document.createElement('div');
+mainMenu.setAttribute('id', 'main-menu');
 
-const menuContainer = document.createElement("div");
-menuContainer.setAttribute("id", "menu-container");
+const menuContainer = document.createElement('div');
+menuContainer.setAttribute('id', 'menu-container');
 
-const heading = document.createElement("div");
-heading.setAttribute("id", "heading");
-heading.innerHTML = "▲<br>synthétique";
+const heading = document.createElement('div');
+heading.setAttribute('id', 'heading');
+heading.innerHTML = '▲<br>synthétique';
 menuContainer.appendChild(heading);
 
-const enterButton = document.createElement("button");
-enterButton.setAttribute("id", "enter-button");
-enterButton.innerText = "enter";
+const enterButton = document.createElement('button');
+enterButton.setAttribute('id', 'enter-button');
+enterButton.innerText = 'enter';
 menuContainer.appendChild(enterButton);
 
-const credits = document.createElement("div");
-credits.setAttribute("id", "credits");
+const credits = document.createElement('div');
+credits.setAttribute('id', 'credits');
 credits.innerHTML = `
 made by 
 <a 
@@ -112,14 +112,14 @@ document.body.appendChild(mainMenu);
 /**
  * Help Panel
  */
-const asterisk = document.createElement("div");
-asterisk.setAttribute("id", "asterisk");
-asterisk.innerHTML = "✱";
+const asterisk = document.createElement('div');
+asterisk.setAttribute('id', 'asterisk');
+asterisk.innerHTML = '✱';
 mainMenu.appendChild(asterisk);
 
 let isHelpPanelOpen = false;
-const helpPanel = document.createElement("div");
-helpPanel.setAttribute("id", "help-panel");
+const helpPanel = document.createElement('div');
+helpPanel.setAttribute('id', 'help-panel');
 helpPanel.innerHTML = `
 key<br>
 S : start/stop music<br>
@@ -127,7 +127,7 @@ H : open controls<br>
 M : mark fisher`;
 mainMenu.appendChild(helpPanel);
 
-asterisk.addEventListener("click", () => {
+asterisk.addEventListener('click', () => {
   if (!isHelpPanelOpen) {
     helpPanel.style.opacity = 1;
     isHelpPanelOpen = true;
@@ -171,7 +171,7 @@ scene.add(frontLight, topLight, bottomLight, leftLight, rightLight);
  */
 const textureLoader = new THREE.TextureLoader();
 
-const squareTexture = textureLoader.load("/textures/square.png");
+const squareTexture = textureLoader.load('/textures/square.png');
 squareTexture.generateMipmaps = false;
 squareTexture.minFilter = THREE.NearestFilter;
 squareTexture.magFilter = THREE.NearestFilter;
@@ -179,7 +179,7 @@ squareTexture.repeat.set(2, 7);
 squareTexture.wrapS = THREE.RepeatWrapping;
 squareTexture.wrapT = THREE.RepeatWrapping;
 
-const squareTextureHorizontal = textureLoader.load("/textures/square.png");
+const squareTextureHorizontal = textureLoader.load('/textures/square.png');
 squareTextureHorizontal.generateMipmaps = false;
 squareTextureHorizontal.minFilter = THREE.NearestFilter;
 squareTextureHorizontal.magFilter = THREE.NearestFilter;
@@ -187,7 +187,7 @@ squareTextureHorizontal.repeat.set(2, 10);
 squareTextureHorizontal.wrapS = THREE.RepeatWrapping;
 squareTextureHorizontal.wrapT = THREE.RepeatWrapping;
 
-const squareTextureLong = textureLoader.load("/textures/square.png");
+const squareTextureLong = textureLoader.load('/textures/square.png');
 squareTextureLong.generateMipmaps = false;
 squareTextureLong.minFilter = THREE.NearestFilter;
 squareTextureLong.magFilter = THREE.NearestFilter;
@@ -195,7 +195,7 @@ squareTextureLong.repeat.set(2, 17);
 squareTextureLong.wrapS = THREE.RepeatWrapping;
 squareTextureLong.wrapT = THREE.RepeatWrapping;
 
-const squareTexturePlane = textureLoader.load("/textures/square.png");
+const squareTexturePlane = textureLoader.load('/textures/square.png');
 squareTexturePlane.generateMipmaps = false;
 squareTexturePlane.minFilter = THREE.NearestFilter;
 squareTexturePlane.magFilter = THREE.NearestFilter;
@@ -423,7 +423,7 @@ const triangleVertices = new Float32Array([
   0, 0.6, 0,
 ]);
 triangleGeometry.setAttribute(
-  "position",
+  'position',
   new THREE.BufferAttribute(triangleVertices, 3)
 );
 
@@ -460,12 +460,12 @@ let markFisherVisible = false;
 let markFisherRight;
 let markFisherLeft;
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener('keydown', (e) => {
   if (entered) {
-    if (e.code === "KeyM") {
+    if (e.code === 'KeyM') {
       if (!markFisherVisible) {
         const markFisherTexture = textureLoader.load(
-          "/textures/mark_fisher.png",
+          '/textures/mark_fisher.png',
           () => {
             const materialMarkFisher = new THREE.MeshStandardMaterial({
               map: markFisherTexture,
@@ -506,7 +506,7 @@ const sizes = {
   height: window.innerHeight,
 };
 
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   // Update sizes
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
@@ -540,9 +540,9 @@ scene.add(camera);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.enabled = false;
-orbitControlsFolder.add(controls, "enabled");
+orbitControlsFolder.add(controls, 'enabled');
 controls.enablePan = false;
-orbitControlsFolder.add(controls, "enablePan");
+orbitControlsFolder.add(controls, 'enablePan');
 controls.autoRotateSpeed = 0.5;
 controls.maxDistance = 10;
 controls.minDistance = 0.75;
@@ -559,10 +559,10 @@ const freeControls = {
     controls.minPolarAngle = 0;
   },
 };
-orbitControlsFolder.add(freeControls, "freeControls");
+orbitControlsFolder.add(freeControls, 'freeControls');
 controls.autoRotate = false;
-autoRotateFolder.add(controls, "autoRotate");
-autoRotateFolder.add(controls, "autoRotateSpeed", -10, 10, 0.001);
+autoRotateFolder.add(controls, 'autoRotate');
+autoRotateFolder.add(controls, 'autoRotateSpeed', -10, 10, 0.001);
 
 /**
  * Renderer
@@ -579,7 +579,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 /**
  * Background
  */
-const root = document.querySelector(":root");
+const root = document.querySelector(':root');
 let backgroundSize = 24.5;
 let change = +0.5;
 setInterval(function () {
@@ -595,7 +595,7 @@ setInterval(function () {
 /**
  * Sound
  */
-const audio = new Audio("/sound/aries_beats_synthwave_piano.mp3");
+const audio = new Audio('/sound/aries_beats_synthwave_piano.mp3');
 audio.loop = true;
 audio.volume = 0.02;
 const volume = 0.2;
@@ -608,17 +608,17 @@ setInterval(() => {
   }
 }, 75);
 
-enterButton.addEventListener("click", () => {
+enterButton.addEventListener('click', () => {
   mainMenu.style.opacity = 0;
-  mainMenu.style.pointerEvents = "none";
+  mainMenu.style.pointerEvents = 'none';
   playing = true;
   entered = true;
   audio.play();
 });
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener('keydown', (e) => {
   if (entered) {
-    if (e.code === "KeyS") {
+    if (e.code === 'KeyS') {
       if (playing) {
         playing = false;
         audio.pause();
@@ -646,7 +646,7 @@ const animate = () => {
   cylinderBottom.rotation.y = -elapsedTime * 0.75;
 
   // Background
-  root.style.setProperty("--background-size", `${backgroundSize}px`);
+  root.style.setProperty('--background-size', `${backgroundSize}px`);
 
   // Update controls
   controls.update();
