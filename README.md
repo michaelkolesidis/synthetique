@@ -66,10 +66,9 @@ Thank you so much for your interest in my project! If you want to go a step furt
 
 <a href='https://ko-fi.com/michaelkolesidis' target='_blank'><img src='https://cdn.ko-fi.com/cdn/kofi1.png' style='border:0px;height:45px;' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
-## Copyright
+## 📜 License
 
-Copyright (c) Michael Kolesidis. All rights reserved.
+<a href="https://www.gnu.org/licenses/agpl-3.0.html"><img src="./agplv3.svg" height="80px" /></a>
 
-Reproduction of any of the artwork on this website for commercial use is not permitted without first receiving written permission from the artist. You cannot host, display, distribute or share this Work in any form, including physical and digital. You cannot use this Work in any commercial or non-commercial product, website or project. You cannot sell this Work and you cannot mint an NFTs of it.
-
-Under the Copyright Law, it is fair use to reproduce a single copy for personal or educational purposes, provided that no changes are made to the content and provided that a copyright notice attesting to the content is attached to the reproduction. Beyond that, no further copies of works of art may be made or distributed on this website without written permission.
+Copyright (c) Michael Kolesidis  
+The code is licensed under the [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.html).  

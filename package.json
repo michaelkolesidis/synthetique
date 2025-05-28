@@ -1,9 +1,9 @@
 {
   "name": "synthetique",
   "version": "0.1.0",
-  "author": "Michael Kolesidis",
+  "author": "Michael Kolesidis <mi",
   "description": "Retrofuturistic demo",
-  "license": "UNLICENSED",
+  "license": "AGPL-3.0-or-later",
   "repository": "synthetique",
   "scripts": {
     "dev": "vite",
