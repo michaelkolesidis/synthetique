@@ -4,13 +4,14 @@
   "author": "Michael Kolesidis",
   "description": "Retrofuturistic demo",
   "license": "AGPL-3.0-or-later",
-  "repository": "synthetique",
+  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "start": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "devDepenendencies": {
+  "devDependencies": {
     "vite": "^8.0.10"
   },
   "dependencies": {

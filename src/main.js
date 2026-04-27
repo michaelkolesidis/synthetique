@@ -1,3 +1,4 @@
+import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'dat.gui';
@@ -5,16 +6,6 @@ import * as dat from 'dat.gui';
 /**
  * Basics
  */
-// HTML Title and Favicon
-document.title = 'synthétique';
-
-const favicon =
-  document.querySelector("link[rel*='icon']") || document.createElement('link');
-favicon.rel = 'icon';
-favicon.href =
-  'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>';
-document.getElementsByTagName('head')[0].appendChild(favicon);
-
 // Disable right click
 document.addEventListener(
   'contextmenu',
@@ -148,7 +139,7 @@ scene.add(frontLight, topLight, bottomLight, leftLight, rightLight);
  */
 const textureLoader = new THREE.TextureLoader();
 
-const squareTexture = textureLoader.load('/textures/square.png');
+const squareTexture = textureLoader.load('textures/square.png');
 squareTexture.generateMipmaps = false;
 squareTexture.minFilter = THREE.NearestFilter;
 squareTexture.magFilter = THREE.NearestFilter;
@@ -156,7 +147,7 @@ squareTexture.repeat.set(2, 7);
 squareTexture.wrapS = THREE.RepeatWrapping;
 squareTexture.wrapT = THREE.RepeatWrapping;
 
-const squareTextureHorizontal = textureLoader.load('/textures/square.png');
+const squareTextureHorizontal = textureLoader.load('textures/square.png');
 squareTextureHorizontal.generateMipmaps = false;
 squareTextureHorizontal.minFilter = THREE.NearestFilter;
 squareTextureHorizontal.magFilter = THREE.NearestFilter;
@@ -164,7 +155,7 @@ squareTextureHorizontal.repeat.set(2, 10);
 squareTextureHorizontal.wrapS = THREE.RepeatWrapping;
 squareTextureHorizontal.wrapT = THREE.RepeatWrapping;
 
-const squareTextureLong = textureLoader.load('/textures/square.png');
+const squareTextureLong = textureLoader.load('textures/square.png');
 squareTextureLong.generateMipmaps = false;
 squareTextureLong.minFilter = THREE.NearestFilter;
 squareTextureLong.magFilter = THREE.NearestFilter;
@@ -172,7 +163,7 @@ squareTextureLong.repeat.set(2, 17);
 squareTextureLong.wrapS = THREE.RepeatWrapping;
 squareTextureLong.wrapT = THREE.RepeatWrapping;
 
-const squareTexturePlane = textureLoader.load('/textures/square.png');
+const squareTexturePlane = textureLoader.load('textures/square.png');
 squareTexturePlane.generateMipmaps = false;
 squareTexturePlane.minFilter = THREE.NearestFilter;
 squareTexturePlane.magFilter = THREE.NearestFilter;
@@ -442,7 +433,7 @@ document.addEventListener('keydown', (e) => {
     if (e.code === 'KeyM') {
       if (!markFisherVisible) {
         const markFisherTexture = textureLoader.load(
-          '/textures/mark_fisher.png',
+          'textures/mark_fisher.png',
           () => {
             const materialMarkFisher = new THREE.MeshStandardMaterial({
               map: markFisherTexture,
@@ -578,7 +569,7 @@ setInterval(function () {
 /**
  * Sound
  */
-const audio = new Audio('/sound/aries_beats_synthwave_piano.mp3');
+const audio = new Audio('sound/aries_beats_synthwave_piano.mp3');
 audio.loop = true;
 audio.volume = 0.02;
 const volume = 0.2;
@@ -616,10 +607,12 @@ document.addEventListener('keydown', (e) => {
 /**
  * Animate
  */
-const clock = new THREE.Clock();
+const timer = new THREE.Timer();
+timer.connect(document);
 
-const animate = () => {
-  const elapsedTime = clock.getElapsedTime();
+const animate = (timestamp) => {
+  timer.update(timestamp);
+  const elapsedTime = timer.getElapsed();
 
   ambientLight.intensity = Math.abs(Math.sin(elapsedTime * 0.5) * 0.5);
 
