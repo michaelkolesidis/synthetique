@@ -9,7 +9,7 @@ Made with [Three.js](https://threejs.org/)
 - [dat.GUI](https://github.com/dataarts/dat.gui)
 - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
 - [Vite](https://vite.dev/)
-- [Yarn](https://yarnpkg.com/)
+- [pnpm](https://pnpm.io/)
 
 ## Controls
 
@@ -31,17 +31,17 @@ Made with [Three.js](https://threejs.org/)
 
 ## Setup
 
-First, you need to download and install [Node.js](https://nodejs.org/en/download/), as well as, install Yarn globally. Then, clone or download the project, and while inside its main folder run the following commands:
+First, you need to download and install [Node.js](https://nodejs.org/en/download/), as well as, install pnpm globally. Then, clone or download the project, and while inside its main folder run the following commands:
 
 ```bash
 # Install dependencies (only the first time)
-yarn
+pnpm install
 
 # Run the local server at localhost:8080
-yarn dev
+pnpm run dev
 
 # Build for production in the dist/ directory
-yarn build
+pnpm run build
 ```
 
 ## Screenshots

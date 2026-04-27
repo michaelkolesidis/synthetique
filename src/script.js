@@ -21,7 +21,7 @@ document.addEventListener(
   (e) => {
     e.preventDefault();
   },
-  false
+  false,
 );
 
 // Debug panel
@@ -118,7 +118,7 @@ asterisk.addEventListener('click', () => {
  * Lights
  */
 // Ambient light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
 // front
@@ -285,7 +285,7 @@ structure.add(
   depthBottomLeft,
   depthBottomRight,
   frontLeft,
-  frontRight
+  frontRight,
 );
 
 structure.scale.set(0.5, 0.5, 0.5);
@@ -316,7 +316,7 @@ frontBtmRightVerticalPatch.position.z = 9.501;
 
 const frontTopLeftHorizontalPatch = new THREE.Mesh(
   patchGeometry,
-  materialPlane
+  materialPlane,
 );
 frontTopLeftHorizontalPatch.position.x = -2;
 frontTopLeftHorizontalPatch.position.y = 2.001;
@@ -325,7 +325,7 @@ frontTopLeftHorizontalPatch.rotation.x = -Math.PI / 2;
 
 const frontTopRightHorizontalPatch = new THREE.Mesh(
   patchGeometry,
-  materialPlane
+  materialPlane,
 );
 frontTopRightHorizontalPatch.position.x = 2;
 frontTopRightHorizontalPatch.position.y = 2.001;
@@ -334,7 +334,7 @@ frontTopRightHorizontalPatch.rotation.x = -Math.PI / 2;
 
 const frontBtmLeftHorizontalPatch = new THREE.Mesh(
   patchGeometry,
-  materialPlane
+  materialPlane,
 );
 frontBtmLeftHorizontalPatch.position.x = -2;
 frontBtmLeftHorizontalPatch.position.y = -2.001;
@@ -343,7 +343,7 @@ frontBtmLeftHorizontalPatch.rotation.x = Math.PI / 2;
 
 const frontBtmRightHorizontalPatch = new THREE.Mesh(
   patchGeometry,
-  materialPlane
+  materialPlane,
 );
 frontBtmRightHorizontalPatch.position.x = 2;
 frontBtmRightHorizontalPatch.position.y = -2.001;
@@ -386,7 +386,7 @@ structure.add(
   backTopLeftPatch,
   backBottomLeftPatch,
   backTopRightPatch,
-  backBottomRightPatch
+  backBottomRightPatch,
 );
 
 // Triangle
@@ -401,7 +401,7 @@ const triangleVertices = new Float32Array([
 ]);
 triangleGeometry.setAttribute(
   'position',
-  new THREE.BufferAttribute(triangleVertices, 3)
+  new THREE.BufferAttribute(triangleVertices, 3),
 );
 
 const triangle = new THREE.Mesh(
@@ -409,7 +409,7 @@ const triangle = new THREE.Mesh(
   new THREE.MeshBasicMaterial({
     color: 0xcafe00,
     side: THREE.DoubleSide,
-  })
+  }),
 );
 triangle.scale.set(0.4, 0.4, 0.4);
 triangle.position.y = 0.075;
@@ -450,7 +450,7 @@ document.addEventListener('keydown', (e) => {
 
             markFisherRight = new THREE.Mesh(
               new THREE.PlaneGeometry(2, 2),
-              materialMarkFisher
+              materialMarkFisher,
             );
             markFisherRight.position.z = 1.5;
             markFisherRight.position.x = 2;
@@ -463,7 +463,7 @@ document.addEventListener('keydown', (e) => {
 
             scene.add(markFisherRight, markFisherLeft);
             markFisherVisible = true;
-          }
+          },
         );
       } else {
         scene.remove(markFisherRight, markFisherLeft);
@@ -504,7 +504,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   sizes.width / sizes.height,
   0.1,
-  20
+  20,
 );
 camera.position.x = 0;
 camera.position.y = 0;
@@ -552,6 +552,12 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+// renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+renderer.toneMapping = THREE.LinearToneMapping;
+renderer.toneMappingExposure = 2.5;
 
 /**
  * Background

@@ -1,7 +1,7 @@
 {
   "name": "synthetique",
   "version": "0.1.0",
-  "author": "Michael Kolesidis <mi",
+  "author": "Michael Kolesidis",
   "description": "Retrofuturistic demo",
   "license": "AGPL-3.0-or-later",
   "repository": "synthetique",
@@ -10,12 +10,12 @@
     "start": "vite",
     "build": "vite build"
   },
-  "devDependencies": {
-    "vite": "^6.0.7"
+  "devDepenendencies": {
+    "vite": "^8.0.10"
   },
   "dependencies": {
     "dat.gui": "^0.7.9",
     "stats.js": "^0.17.0",
-    "three": "^0.154.0"
+    "three": "^0.184.0"
   }
 }
